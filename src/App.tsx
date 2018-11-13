@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { Canvas } from "./components/Canvas";
 import { Rule } from "./components/Rule";
+import { generateMatrix } from "./generate/CellularAutomata";
 
 const size = 511;
 
@@ -112,7 +113,7 @@ class App extends React.Component<{ code: number }> {
   };
 
   private drawMatrix = () => {
-    const matrix = this.generateMatrix(size);
+    const matrix = generateMatrix(this.generateCode(), size);
     this.graphics.clear();
     this.graphics.beginFill(0x000000);
     for (let i = 0; i < size; i++) {
@@ -125,57 +126,17 @@ class App extends React.Component<{ code: number }> {
     this.graphics.endFill();
   };
 
-  private generateMatrix = (n: number) => {
-    const matrix = [this.generateInitialRow(n * 3)];
-
-    for (let i = 1; i < n; i++) {
-      matrix.push(this.reducer(matrix[i - 1]));
-    }
-    return matrix;
-  };
-
-  private generateInitialRow = (n: number) => {
-    if (n % 2 === 0) {
-      throw new Error("n has to be even");
-    }
-
-    const initialRow: boolean[] = [];
-
-    for (let i = 0; i < n; i++) {
-      initialRow.push(i === (n + 1) / 2);
-    }
-
-    return initialRow;
-  };
-
-  private reducer = (row: boolean[]) => {
-    return row.map((value, index) => {
-      const q = index === 0 ? false : row[index - 1];
-      const r = row[index];
-      const l = index === row.length - 1 ? false : row[index + 1];
-
-      return this.getNextCell(q, r, l);
-    });
-  };
-
-  private getNextCell = (q: boolean, r: boolean, l: boolean) => {
-    if (q && r && l) {
-      return this.state[7];
-    } else if (q && r && !l) {
-      return this.state[6];
-    } else if (q && !r && l) {
-      return this.state[5];
-    } else if (q && !r && !l) {
-      return this.state[4];
-    } else if (!q && r && l) {
-      return this.state[3];
-    } else if (!q && r && !l) {
-      return this.state[2];
-    } else if (!q && !r && l) {
-      return this.state[1];
-    } else {
-      return this.state[0];
-    }
+  private generateCode = () => {
+    return (
+      (this.state[0] ? 1 : 0) +
+      (this.state[1] ? 2 : 0) +
+      (this.state[2] ? 4 : 0) +
+      (this.state[3] ? 8 : 0) +
+      (this.state[4] ? 16 : 0) +
+      (this.state[5] ? 32 : 0) +
+      (this.state[6] ? 64 : 0) +
+      (this.state[7] ? 128 : 0)
+    );
   };
 }
 
