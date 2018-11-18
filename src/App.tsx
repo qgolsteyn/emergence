@@ -14,10 +14,20 @@ const StyledOptions = styled.div`
   bottom: 0;
   border-top: 1px solid black;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
   justify-content: center;
   align-items: center;
   background: white;
+`;
+
+const StyledRules = styled.div`
+  display: flex;
+`;
+
+const StyledRuleTitle = styled.div`
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 4px;
 `;
 
 class App extends React.Component<{ code: number }> {
@@ -46,62 +56,65 @@ class App extends React.Component<{ code: number }> {
       <>
         <Canvas n={size} graphics={this.graphics} />
         <StyledOptions>
-          <Rule
-            r={true}
-            q={true}
-            l={true}
-            o={this.state[7]}
-            onClick={this.onClick(7)}
-          />
-          <Rule
-            r={true}
-            q={true}
-            l={false}
-            o={this.state[6]}
-            onClick={this.onClick(6)}
-          />
-          <Rule
-            r={true}
-            q={false}
-            l={true}
-            o={this.state[5]}
-            onClick={this.onClick(5)}
-          />
-          <Rule
-            r={true}
-            q={false}
-            l={false}
-            o={this.state[4]}
-            onClick={this.onClick(4)}
-          />
-          <Rule
-            r={false}
-            q={true}
-            l={true}
-            o={this.state[3]}
-            onClick={this.onClick(3)}
-          />
-          <Rule
-            r={false}
-            q={true}
-            l={false}
-            o={this.state[2]}
-            onClick={this.onClick(2)}
-          />
-          <Rule
-            r={false}
-            q={false}
-            l={true}
-            o={this.state[1]}
-            onClick={this.onClick(1)}
-          />
-          <Rule
-            q={false}
-            r={false}
-            l={false}
-            o={this.state[0]}
-            onClick={this.onClick(0)}
-          />
+          <StyledRuleTitle>Rule {this.generateCode()}</StyledRuleTitle>
+          <StyledRules>
+            <Rule
+              r={true}
+              q={true}
+              l={true}
+              o={this.state[7]}
+              onClick={this.onClick(7)}
+            />
+            <Rule
+              r={true}
+              q={true}
+              l={false}
+              o={this.state[6]}
+              onClick={this.onClick(6)}
+            />
+            <Rule
+              r={true}
+              q={false}
+              l={true}
+              o={this.state[5]}
+              onClick={this.onClick(5)}
+            />
+            <Rule
+              r={true}
+              q={false}
+              l={false}
+              o={this.state[4]}
+              onClick={this.onClick(4)}
+            />
+            <Rule
+              r={false}
+              q={true}
+              l={true}
+              o={this.state[3]}
+              onClick={this.onClick(3)}
+            />
+            <Rule
+              r={false}
+              q={true}
+              l={false}
+              o={this.state[2]}
+              onClick={this.onClick(2)}
+            />
+            <Rule
+              r={false}
+              q={false}
+              l={true}
+              o={this.state[1]}
+              onClick={this.onClick(1)}
+            />
+            <Rule
+              q={false}
+              r={false}
+              l={false}
+              o={this.state[0]}
+              onClick={this.onClick(0)}
+            />
+          </StyledRules>
         </StyledOptions>
       </>
     );
