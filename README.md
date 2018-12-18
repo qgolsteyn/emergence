@@ -18,7 +18,7 @@ Science*. More information about elementary cellular automaton can be found [her
 
 The website uses the static website generator [Create React App](https://github.com/facebook/create-react-app).
 
-[View live website](https://emergence.golsteyn.ca)
+[View live website](https://emergence.golsteyn.com)
 
 ## Getting Started
 
